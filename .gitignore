@@ -1,0 +1,5 @@
+.venv
+logs
+.idea
+jaffle_shop/logs
+jaffle_shop/target
