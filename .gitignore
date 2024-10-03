@@ -3,3 +3,4 @@ logs
 .idea
 jaffle_shop/logs
 jaffle_shop/target
+collect-data/countries_data*
