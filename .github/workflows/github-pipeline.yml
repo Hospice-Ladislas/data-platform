@@ -64,3 +64,4 @@ jobs:
           --oauth-service-account-email collect-data@data-platform-436510.iam.gserviceaccount.com \
           --time-zone "UTC" \
           --description "Periodic trigger for Cloud Run"
+
