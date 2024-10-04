@@ -22,7 +22,7 @@ jobs:
     # Set up GCP authentication
     - id: 'auth'
       name: Set up Google Cloud credentials
-      uses: google-github-actions/auth@v0.4.0
+      uses: google-github-actions/auth@v2.0.0
       with:
         workload_identity_provider: 'projects/757651747361/locations/global/workloadIdentityPools/workload-identity/providers/workload-identity-provider'
         service_account: 'collect-data@data-platform-436510.iam.gserviceaccount.com'
@@ -30,8 +30,6 @@ jobs:
     # Configure Docker for Google Cloud
     - name: Configure Docker to use GCR
       run: |
-        gcloud config set project data-platform-436510
-        gcloud config set account collect-data@data-platform-436510.iam.gserviceaccount.com
         gcloud --quiet auth configure-docker ${{ secrets.GOOGLE_CONTAINER_REGISTRY_REGION }}-docker.pkg.dev
 
     # Build the Docker image
