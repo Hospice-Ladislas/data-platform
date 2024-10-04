@@ -19,11 +19,6 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    # Show the repository owner
-    - name: Get repository owner
-      run:
-        echo "Repository owner is: ${{ github.repository_owner }}"
-
     # Set up GCP authentication
     - id: 'auth'
       name: Set up Google Cloud credentials
