@@ -3,9 +3,6 @@ LABEL authors="d_hos"
 
 ENV APP_HOME /app
 
-# Define environment variable
-ENV PORT 8080
-
 # Set the working directory in the container
 WORKDIR $APP_HOME
 

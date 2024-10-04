@@ -48,11 +48,14 @@ jobs:
     - name: Deploy to Cloud Run
       run: |
         IMAGE_NAME=${{ secrets.GOOGLE_CONTAINER_REGISTRY_REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT }}/data-platform-images/${{ secrets.CLOUD_RUN_SERVICE }}:$(echo $GITHUB_SHA | cut -c1-8)
-        gcloud run deploy ${{ secrets.CLOUD_RUN_SERVICE }} \
-          --image $IMAGE_NAME \
-          --platform managed \
-          --region ${{ secrets.GOOGLE_CONTAINER_REGISTRY_REGION }} \
-          --allow-unauthenticated
+        gcloud run jobs update ${{ secrets.CLOUD_RUN_SERVICE }} \
+          --image=$IMAGE_NAME \
+          --region=${{ secrets.GOOGLE_CONTAINER_REGISTRY_REGION }} \
+          --project=${{ secrets.GCP_PROJECT }} \
+          --max-retries=3 \
+          --memory=512Mi \
+          --timeout=600s \
+          --command="python app/generic-collect-api-data.py"
 
     # Set up Cloud Scheduler
     - name: Set up Cloud Scheduler Job
