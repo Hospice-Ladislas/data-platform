@@ -60,6 +60,14 @@ jobs:
     # Set up Cloud Scheduler
     - name: Set up Cloud Scheduler Job
       run: |
-        gcloud scheduler jobs create http api-to-gcs-job --project ${{ secrets.GCP_PROJECT }} --schedule "0 8 * * *" --uri "https://${{ secrets.GCR_REGION }}-run.googleapis.com/apis/run.googleapis.com/v1/namespaces/${{ secrets.GCP_PROJECT }}/jobs/${{ secrets.CLOUD_RUN_SERVICE }}:run" --http-method POST --oauth-service-account-email collect-data@data-platform-436510.iam.gserviceaccount.com --time-zone "UTC" --description "Periodic trigger for Cloud Run"
+        gcloud scheduler jobs create http api-to-gcs-job \
+          --project=${{ secrets.GCP_PROJECT }} \
+          --schedule="0 8 * * *" \
+          --uri="https://${{ secrets.GCR_REGION }}-run.googleapis.com/apis/run.googleapis.com/v1/namespaces/${{ secrets.GCP_PROJECT }}/jobs/${{ secrets.CLOUD_RUN_SERVICE }}:run" \
+          --http-method=POST \
+          --oidc-service-account-email=collect-data@data-platform-436510.iam.gserviceaccount.com \
+          --location="${{ secrets.GOOGLE_CONTAINER_REGISTRY_REGION }}" \
+          --time-zone="UTC" \
+          --description="Periodic trigger for Cloud Run"
         
 
