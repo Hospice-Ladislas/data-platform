@@ -54,7 +54,7 @@ jobs:
           --project=${{ secrets.GCP_PROJECT }} \
           --max-retries=3 \
           --memory=512Mi \
-          --timeout=600s \
+          --task-timeout=900s \
           --command="python app/generic-collect-api-data.py"
 
     # Set up Cloud Scheduler
