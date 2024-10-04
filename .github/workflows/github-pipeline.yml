@@ -48,7 +48,7 @@ jobs:
     - name: Deploy to Cloud Run
       run: |
         IMAGE_NAME=${{ secrets.GOOGLE_CONTAINER_REGISTRY_REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT }}/data-platform-images/${{ secrets.CLOUD_RUN_SERVICE }}:$(echo $GITHUB_SHA | cut -c1-8)
-        gcloud run jobs update ${{ secrets.CLOUD_RUN_SERVICE }} \
+        gcloud run jobs create ${{ secrets.CLOUD_RUN_SERVICE }} \
           --image=$IMAGE_NAME \
           --region=${{ secrets.GOOGLE_CONTAINER_REGISTRY_REGION }} \
           --project=${{ secrets.GCP_PROJECT }} \
