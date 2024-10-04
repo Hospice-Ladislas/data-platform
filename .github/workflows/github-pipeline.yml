@@ -43,6 +43,7 @@ jobs:
     - name: Push Docker image to Google Container Registry
       run: |
         IMAGE_NAME=${{ secrets.GOOGLE_CONTAINER_REGISTRY_REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT }}/data-platform-images/${{ secrets.CLOUD_RUN_SERVICE }}:$(echo $GITHUB_SHA | cut -c1-8)
+        echo "Docker image name: $IMAGE_NAME"  # Print the Docker image name
         docker push $IMAGE_NAME
 
     # Deploy to Cloud Run
