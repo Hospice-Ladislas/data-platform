@@ -30,7 +30,7 @@ jobs:
     # Configure Docker for Google Cloud
     - name: Configure Docker to use GCR
       run: |
-        gcloud --quiet auth configure-docker eu-docker.pkg.dev
+        gcloud --quiet auth configure-docker ${{ secrets.GOOGLE_CONTAINER_REGISTRY_REGION }}-docker.pkg.dev
 
     # Build the Docker image
     - name: Build the Docker image
