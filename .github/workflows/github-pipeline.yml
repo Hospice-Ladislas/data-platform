@@ -36,7 +36,7 @@ jobs:
     - name: Build the Docker image
       run: |
         IMAGE_NAME=${{ secrets.GOOGLE_CONTAINER_REGISTRY_REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT }}/cloud-run-source-deploy/${{ secrets.CLOUD_RUN_SERVICE }}:$(echo $GITHUB_SHA | cut -c1-8)
-        docker build -t $IMAGE_NAME -f ../../collect-data/Dockerfile .
+        docker build -t $IMAGE_NAME -f ./collect-data/Dockerfile ./collect-data
 
     # Push the Docker image to GCR
     - name: Push Docker image to Google Container Registry
